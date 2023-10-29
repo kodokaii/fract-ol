@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>	+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/29 17:37:43 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:57:18 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_cleanup(int returnCode, t_mlx *mlx)
 		mlx_close_window(mlx->win);
 		mlx_terminate(mlx->win);
 	}
-	ft_putendl_fd(mlx_strerror(mlx_errno), 1);
+	if (returnCode)
+		ft_putendl_fd(mlx_strerror(mlx_errno), 1);
 	exit(returnCode);
 }
 
