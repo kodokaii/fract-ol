@@ -1,6 +1,6 @@
 NAME 		= fractol
 CC 			= cc
-CFLAGS 		+= -Wall -Wextra -Werror -Ofast
+CFLAGS 		+= -Wall -Wextra -Werror -O3
 CLINKS		= -ldl -lglfw -pthread -lm
 LIBFT		= libft/libft.a
 LIB 		= minilibx/libmlx.a

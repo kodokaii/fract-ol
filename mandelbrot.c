@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>	+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/30 03:53:41 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:39:11 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,26 @@ int	ft_mandelbrot(float x, float y, t_mlx *mlx)
 	double	c[2];
 	double	z[2];
 	double	z2[2];
-	double	bright;
-	t_uint	i;
+	double	distance;
+	double	i;
 
-	i = 0;
+	i = 0.0L;
+	distance = 0.0L;
 	c[0] = mlx->fract.center[0] + x * mlx->fract.ratio * mlx->fract.radius;
 	c[1] = mlx->fract.center[1] + y * mlx->fract.radius;
 	z[0] = mlx->fract.z0[0];
 	z[1] = mlx->fract.z0[1];
 	z2[0] = z[0] * z[0];
 	z2[1] = z[1] * z[1];
-	while (i <= mlx->fract.iter && z2[0] + z2[1] < 4)
+	while (i < mlx->fract.iter && z2[0] + z2[1] < 3)
 	{
 		z[1] = 2 * z[0] * z[1] + c[1];
 		z[0] = z2[0] - z2[1] + c[0];
+		distance -= sqrt(z2[0] + z2[1]);
 		z2[0] = z[0] * z[0];
 		z2[1] = z[1] * z[1];
+		distance += sqrt(z2[0] + z2[1]);
 		i++;
 	}
-	if (mlx->fract.iter < i)
-		return (0xff);
-	bright = (double)i / (double)mlx->fract.iter;
-	return (ft_pixel(bright, bright, bright, 1));
-}
-
-void	ft_draw_mandelbrot(void *param)
-{
-	t_mlx	*mlx;
-
-	mlx = param;
-	ft_pixel_iter(mlx->image, mlx, &ft_mandelbrot);
+	return (ft_color(mlx, i, distance));
 }

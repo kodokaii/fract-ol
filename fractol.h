@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/30 03:43:52 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:01:17 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ typedef struct s_fractol
 	double	z0[2];
 	double	radius;
 	double	ratio;
-	t_uint	iter;
+	double	iter;
 	t_uint	type;
+	t_uint	color;
 }	t_fractol;
 
 typedef struct s_mlx
@@ -42,6 +43,8 @@ typedef struct s_mlx
 
 void	ft_resize(int width, int heigth, void *param);
 void	ft_zoom(double xdelta, double ydelta, void *param);
+void	ft_keyhook(mlx_key_data_t keydata, void *param);
+int		ft_color(t_mlx *mlx, double i, double distance);
 void	ft_draw(void *param);
 
 int		ft_mandelbrot(float x, float y, t_mlx *mlx);
