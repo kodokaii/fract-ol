@@ -6,13 +6,13 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>	+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/29 18:54:13 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/30 03:53:41 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	ft_mandelbrot(float x, float y, t_mlx *mlx)
+int	ft_mandelbrot(float x, float y, t_mlx *mlx)
 {
 	double	c[2];
 	double	z[2];
@@ -36,7 +36,7 @@ static int	ft_mandelbrot(float x, float y, t_mlx *mlx)
 		i++;
 	}
 	if (mlx->fract.iter < i)
-		return (0x000000ff);
+		return (0xff);
 	bright = (double)i / (double)mlx->fract.iter;
 	return (ft_pixel(bright, bright, bright, 1));
 }

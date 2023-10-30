@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/29 18:52:16 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/30 03:43:52 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # define FT_WIDTH		1080
 # define FT_HEIGHT		1080
 
+# define FRACT_COUNT	1
+# define VALID_ARG		"m"
+
 typedef struct s_fractol
 {
 	double	center[2];
@@ -27,6 +30,7 @@ typedef struct s_fractol
 	double	radius;
 	double	ratio;
 	t_uint	iter;
+	t_uint	type;
 }	t_fractol;
 
 typedef struct s_mlx
@@ -36,7 +40,11 @@ typedef struct s_mlx
 	t_fractol	fract;
 }	t_mlx;
 
-void	ft_draw_mandelbrot(void *param);
+void	ft_resize(int width, int heigth, void *param);
+void	ft_zoom(double xdelta, double ydelta, void *param);
+void	ft_draw(void *param);
+
+int		ft_mandelbrot(float x, float y, t_mlx *mlx);
 
 void	ft_cleanup(int returnCode, t_mlx *mlx);
 int		ft_pixel(float r, float g, float b, float a);

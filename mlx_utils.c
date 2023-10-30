@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>	+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/29 21:57:18 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:10:54 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_pixel_iter(mlx_image_t *image, t_mlx *mlx,
 		{
 			color = (*f)(
 					2 * (float)x / (float)image->width - 1,
-					2 * (float)y / (float)image->width - 1,
+					2 * (float)y / (float)image->height - 1,
 					mlx);
 			mlx_put_pixel(image, x, y, color);
 			y++;
