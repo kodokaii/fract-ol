@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>	+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/29 16:21:52 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:14:09 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ ssize_t	ft_min_ssize(ssize_t a, ssize_t b)
 	return (b);
 }
 
-float	ft_min_float(float a, float b)
+double	ft_min_double(double a, double b)
 {
 	if (a < b)
 		return (a);

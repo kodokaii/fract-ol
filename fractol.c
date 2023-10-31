@@ -6,7 +6,7 @@
 /*   By: nlaerema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 12:22:49 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/30 21:19:28 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/31 19:13:46 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,21 @@ void	ft_move(t_mlx *mlx, double sensitivity)
 int	ft_color(t_mlx *mlx, double i, double distance)
 {
 	double		bright;
-	static int	color[] = {0x42300FFF, 0x19071AFF,
-		0x090147FF, 0x040449FF,
-		0x000764FF, 0x0C2C8AFF,
-		0x1852B1FF, 0x397DD1FF,
-		0x86B5E5FF, 0xD3ECF8FF,
-		0xF1E9BFFF, 0xF8C95FFF,
-		0xFFAA00FF, 0xCC8000FF,
-		0x995700FF, 0x6A3403FF};
+	static int	color[] = {0x42300FFF, 0x19071AFF, 0x090147FF, 0x040449FF,
+		0x000764FF, 0x0C2C8AFF, 0x1852B1FF, 0x397DD1FF,
+		0x86B5E5FF, 0xD3ECF8FF, 0xF1E9BFFF, 0xF8C95FFF,
+		0xFFAA00FF, 0xCC8000FF, 0x995700FF, 0x6A3403FF};
 
-	bright = i / mlx->fract.iter * fabs(distance) * 0.5L;
 	if (mlx->fract.color == 0)
-		return (color[(t_uint)(bright * 64) % 16]);
-	return (ft_pixel(bright, bright, bright, 1));
+	{
+		bright = i / mlx->fract.iter * fabs(distance) * 0.5L;
+		return (ft_pixel(bright, bright, bright, 1));
+	}
+	if (i == mlx->fract.iter)
+		bright = fabs(distance) * 0.5L;
+	else
+		bright = i / mlx->fract.iter;
+	return (color[(t_uint)(bright * 67) % 16]);
 }
 
 void	ft_draw(void *param)
@@ -91,7 +93,7 @@ void	ft_draw(void *param)
 	double		iter_sensitivity;
 	double		move_sensitivity;
 	static int	(*f[FRACT_COUNT])(float, float, t_mlx *)
-		= {&ft_mandelbrot};
+		= {&ft_mandelbrot, &ft_julia};
 
 	mlx = param;
 	iter_sensitivity = 2.0L;

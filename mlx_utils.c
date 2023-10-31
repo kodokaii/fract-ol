@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>	+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/30 13:45:45 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:42:53 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	ft_pixel(float r, float g, float b, float a)
 {
 	int	color;
 
-	color = ((int)(ft_min_float(r, 1) * 0xff)) << 24;
-	color |= ((int)(ft_min_float(g, 1) * 0xff)) << 16;
-	color |= ((int)(ft_min_float(b, 1) * 0xff)) << 8;
-	color |= (int)(ft_min_float(a, 1) * 0xff);
+	color = ((int)(ft_min_double(r, 1) * 0xff)) << 24;
+	color |= ((int)(ft_min_double(g, 1) * 0xff)) << 16;
+	color |= ((int)(ft_min_double(b, 1) * 0xff)) << 8;
+	color |= (int)(ft_min_double(a, 1) * 0xff);
 	return (color);
 }
 

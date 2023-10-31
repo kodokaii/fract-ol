@@ -6,13 +6,13 @@
 /*   By: nlaerema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 12:22:49 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/30 21:10:28 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:55:35 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_keyhook(mlx_key_data_t keydata, void *param)
+static void	ft_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_mlx	*mlx;
 
@@ -25,17 +25,14 @@ void	ft_keyhook(mlx_key_data_t keydata, void *param)
 		mlx->fract.color = 1;
 }
 
-int	ft_mlx_init(t_mlx *mlx, char c)
+static int	ft_mlx_init(t_mlx *mlx)
 {
 	mlx->win = NULL;
 	mlx->image = NULL;
 	mlx->fract.center[0] = 0.0L;
 	mlx->fract.center[1] = 0.0L;
-	mlx->fract.z0[0] = 0.0L;
-	mlx->fract.z0[1] = 0.0L;
 	mlx->fract.radius = 2.0L;
 	mlx->fract.iter = 21.0L;
-	mlx->fract.type = ft_strchr(VALID_ARG, c) - VALID_ARG;
 	mlx->fract.color = 0;
 	mlx->win = mlx_init(FT_WIDTH, FT_HEIGHT, "fractol", true);
 	if (!mlx->win)
@@ -48,13 +45,32 @@ int	ft_mlx_init(t_mlx *mlx, char c)
 	return (0);
 }
 
+static int	ft_get_fractal(t_mlx *mlx, int argc, char **argv)
+{
+	mlx->fract.type = FRACT_COUNT;
+	if (1 < argc)
+	{
+		if (!ft_strncmp(argv[1], "m", 2))
+			mlx->fract.type = 0;
+		else if (!ft_strncmp(argv[1], "j", 2))
+			mlx->fract.type = 1;
+		if (2 < argc)
+			mlx->fract.z0[0] = ft_atof(argv[2]);
+		if (3 < argc)
+			mlx->fract.z0[1] = ft_atof(argv[3]);
+		if (mlx->fract.type != FRACT_COUNT)
+			return (1);
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_mlx		mlx;
+	static t_mlx		mlx = {};
 
-	if (1 < argc && ft_strchr(VALID_ARG, argv[1][0]) && argv[1][1] == '\0')
+	if (ft_get_fractal(&mlx, argc, argv))
 	{
-		if (ft_mlx_init(&mlx, argv[1][0]))
+		if (ft_mlx_init(&mlx))
 			ft_cleanup(1, &mlx);
 		mlx_resize_hook(mlx.win, &ft_resize, &mlx);
 		mlx_key_hook(mlx.win, &ft_keyhook, &mlx);
@@ -63,6 +79,6 @@ int	main(int argc, char *argv[])
 		mlx_loop(mlx.win);
 		ft_cleanup(0, &mlx);
 	}
-	ft_putstr_fd("Error !\nArgument invalid\n\nm = mandelbrot\n", 2);
+	ft_putstr_fd(MESSAGE_ERROR, 2);
 	return (1);
 }

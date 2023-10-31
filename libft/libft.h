@@ -6,7 +6,7 @@
 /*   By: kodokai <kodokai.featheur@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:43:09 by kodokai           #+#    #+#             */
-/*   Updated: 2023/10/29 16:21:21 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:44:08 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,24 @@ int		ft_min_int(int a, int b);
 t_uint	ft_min_uint(t_uint a, t_uint b);
 size_t	ft_min_size_t(size_t a, size_t b);
 ssize_t	ft_min_ssize(ssize_t a, ssize_t b);
-float	ft_min_float(float a, float b);
+double	ft_min_double(double a, double b);
 
 int		ft_max_int(int a, int b);
 t_uint	ft_max_uint(t_uint a, t_uint b);
 size_t	ft_max_size(size_t a, size_t b);
 ssize_t	ft_max_ssize(ssize_t a, ssize_t b);
-float	ft_max_float(float a, float b);
+double	ft_max_double(double a, double b);
 
 t_byte	ft_abs_char(t_byte n);
 t_uint	ft_abs_int(t_uint n);
 
-int		ft_isalpha(int c);
-int		ft_isdigit(int c);
-int		ft_isalnum(int c);
-int		ft_isascii(int c);
-int		ft_isprint(int c);
+t_bool	ft_isalpha(int c);
+t_bool	ft_isdigit(int c);
+t_bool	ft_isalnum(int c);
+t_bool	ft_isascii(int c);
+t_bool	ft_isprint(int c);
+t_bool	ft_isspace(int c);
+
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 
@@ -88,7 +90,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strpbrk(const char *s, const char *seps);
 char	*ft_strsep(const char *s, const char sep);
 
-int		ft_atoi(const char *nptr);
+int		ft_atoi(const char *str);
+double	ft_atof(const char *str);
 int		ft_strtoi(const char *nptr, char **endptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
