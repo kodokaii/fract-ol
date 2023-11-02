@@ -4,7 +4,14 @@ CFLAGS 		+= -Wall -Wextra -Werror -O3
 CLINKS		= -ldl -lglfw -pthread -lm
 LIBFT		= libft/libft.a
 LIB 		= minilibx/libmlx.a
-SRC 		= $(wildcard *.c)
+SRC 		= burning_ship.c\
+			  fractol.c\
+			  hook.c\
+			  julia.c\
+			  main.c\
+			  mandelbrot.c\
+			  mlx_utils.c\
+			  multibrot.c
 OBJ 		= $(SRC:.c=.o)
 
 all: $(NAME)

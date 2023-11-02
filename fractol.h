@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/31 19:12:47 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:48:42 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 # define FT_WIDTH		1080
 # define FT_HEIGHT		1080
 
-# define FRACT_COUNT 2
+# define FRACT_COUNT 4
+# define COLOR_COUNT 2
 # define MESSAGE_ERROR "Argument invalid !\n\n\
-m = mandelbrot\n\
-j = julia\n"
+m  = mandelbrot\n\
+j  = julia\n\
+b  = burning ship\n\
+mm = multibrot\n"
 
 typedef struct s_fractol
 {
@@ -32,6 +35,7 @@ typedef struct s_fractol
 	double	radius;
 	double	ratio;
 	double	iter;
+	double	pow;
 	t_uint	type;
 	t_uint	color;
 }	t_fractol;
@@ -43,13 +47,17 @@ typedef struct s_mlx
 	t_fractol	fract;
 }	t_mlx;
 
-void	ft_resize(int width, int heigth, void *param);
-void	ft_zoom(double xdelta, double ydelta, void *param);
-int		ft_color(t_mlx *mlx, double i, double distance);
+int		ft_color(t_mlx *mlx, double i, double length);
 void	ft_draw(void *param);
+
+void	ft_resize_hook(int width, int heigth, void *param);
+void	ft_scroll_hook(double xdelta, double ydelta, void *param);
+void	ft_key_hook(mlx_key_data_t keydata, void *param);
 
 int		ft_mandelbrot(float x, float y, t_mlx *mlx);
 int		ft_julia(float x, float y, t_mlx *mlx);
+int		ft_burning_ship(float x, float y, t_mlx *mlx);
+int		ft_multibrot(float x, float y, t_mlx *mlx);
 
 void	ft_cleanup(int returnCode, t_mlx *mlx);
 int		ft_pixel(float r, float g, float b, float a);

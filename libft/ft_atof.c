@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>	+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/10/31 20:54:37 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/11/02 09:47:10 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ static double	ft_decimal_part(const char **str)
 static double	ft_fractional_part(const char *str)
 {
 	double	res;
+	double	mod;
 
 	res = 0;
+	mod = 10;
 	while (ft_isdigit(*str))
 	{
-		res += *str - '0';
-		res /= 10;
+		res += (*str - '0') / mod;
+		mod *= 10;
 		str++;
 	}
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: kodokai <kodokai.featheur@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:43:09 by kodokai           #+#    #+#             */
-/*   Updated: 2023/10/31 20:44:08 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:24:22 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ double	ft_max_double(double a, double b);
 
 t_byte	ft_abs_char(t_byte n);
 t_uint	ft_abs_int(t_uint n);
+double	ft_abs_double(double n);
 
 t_bool	ft_isalpha(int c);
 t_bool	ft_isdigit(int c);
