@@ -37,10 +37,10 @@ $(LIBFT): $(FT)
 	$(MAKE) -C $(FT)
 
 $(MLX):
-	git clone git@github.com:kodokaii/MLX42.git $(MLX)
+	git clone https://github.com/kodokaii/MLX42.git $(MLX)
 
 $(FT):
-	git clone git@github.com:kodokaii/libft_plus_plus.git $(FT)
+	git clone https://github.com/kodokaii/libft_plus_plus.git $(FT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
