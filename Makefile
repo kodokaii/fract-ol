@@ -1,9 +1,17 @@
 NAME 		= fractol
+
 CC 			= cc
+RM			= rm -f
+
 CFLAGS 		+= -Wall -Wextra -Werror -O3
 CLINKS		= -ldl -lglfw -pthread -lm
-LIBFT		= libft/libft.a
-LIB 		= minilibx/libmlx.a
+
+MLX			= minilibx
+LIBMLX 		= $(MLX)/libmlx42.a
+
+FT			= libft
+LIBFT		= $(FT)/libft.a
+
 SRC 		= burning_ship.c\
 			  fractol.c\
 			  hook.c\
@@ -18,23 +26,39 @@ all: $(NAME)
 
 bonus: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(LIB)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(LIB) $(CLINKS)
+$(NAME): $(LIBMLX) $(LIBFT) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(LIBMLX) $(CLINKS)
 
-$(LIBFT): 
-	$(MAKE) -C $$(dirname $(LIBFT))
+$(LIBMLX): $(MLX)
+	cmake $(MLX) -B $(MLX)	
+	$(MAKE) -C $(MLX)
+
+$(LIBFT): $(FT)
+	$(MAKE) -C $(FT)
+
+$(MLX):
+	git clone git@github.com:kodokaii/MLX42.git $(MLX)
+
+$(FT):
+	git clone git@github.com:kodokaii/libft_plus_plus.git $(FT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(MAKE) clean -C $$(dirname $(LIBFT))
-	rm -f $(OBJ)
+	if [ -d "$(MLX)" ]; then $(MAKE) clean -C $(MLX); fi
+	if [ -d "$(FT)" ]; then $(MAKE) clean -C $(FT); fi
+	$(RM) $(OBJ)
 
 fclean: clean
-	rm -f $(LIBFT)
-	rm -f $(NAME)
+	$(RM) $(LIBMLX)
+	$(RM) $(LIBFT)
+	$(RM) $(NAME)
+
+clear: fclean
+	$(RM) -r $(FT)
+	$(RM) -r $(MLX) 
 
 re: fclean all
 
-.PHONY:		all debug clean fclean re
+.PHONY:		all bonus clear clean fclean re

@@ -6,7 +6,7 @@
 /*   By: nlaerema <nlaerema@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:17 by nlaerema          #+#    #+#             */
-/*   Updated: 2023/11/02 17:48:42 by nlaerema         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:42:09 by nlaerema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FRACTOL_H
 
 # include <math.h>
-# include "minilibx/mlx.h"
+# include "minilibx/mlx42.h"
 # include "libft/libft.h"
 
 # define FT_WIDTH		1080
