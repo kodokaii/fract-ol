@@ -2,6 +2,7 @@ NAME 		= fractol
 
 CC 			= cc
 RM			= rm -f
+CLONE 		= git clone --depth=1
 
 CFLAGS 		+= -Wall -Wextra -Werror -O3
 CLINKS		= -ldl -lglfw -pthread -lm
@@ -36,11 +37,12 @@ $(LIBMLX): $(MLX)
 $(LIBFT): $(FT)
 	$(MAKE) -C $(FT)
 
+
 $(MLX):
-	git clone https://github.com/kodokaii/MLX42.git $(MLX)
+	$(CLONE) https://github.com/kodokaii/MLX42.git $(MLX)
 
 $(FT):
-	git clone https://github.com/kodokaii/libft_plus_plus.git $(FT)
+	$(CLONE) https://github.com/kodokaii/libft_full.git $(FT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -56,8 +58,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 clear: fclean
-	$(RM) -r $(FT)
 	$(RM) -r $(MLX) 
+	$(RM) -r $(FT)
 
 re: fclean all
 
